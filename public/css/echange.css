@@ -1,0 +1,238 @@
+
+/*
+STYLE GENERAL
+*/
+
+body,html{
+  height: 100vh;
+  display: flex;
+  flex-direction: column
+}
+
+li{
+  list-style: none;
+}
+
+ul{
+  padding: 0;
+  margin: 0!important;
+}
+
+button{
+  border: none;
+}
+
+img{
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 5px;
+}
+
+.body-content{
+  width: 90%;
+  background: rgb(45, 108, 167);
+  margin: 0 auto;
+  flex: 30;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel{
+  display: flex;
+  justify-content: space-between;
+  flex: 5;
+  align-items: center;
+}
+
+.carousel i{
+  color: white;
+  outline: none;
+}
+
+.carousel p, .liste-drop p{
+  display: none;
+}
+
+
+.body-content .block i{
+display: inline
+}
+/*
+STYLE SCROLL
+*/
+.scroll-img {
+  background: rgba(255, 255, 255, 0.10);
+  width:90%;
+  height: 115px;
+  overflow: hidden;
+  font-size: 0;
+}
+
+.scroll-img ul {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.scroll-img ul li {
+  display: inline-block;
+  margin: 5px 20px;
+}
+
+.scroll-img li {
+  background: rgb(255, 255, 255);
+  border-radius: 15px;
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+}
+
+/*
+STYLE BOUTON
+*/
+
+.carousel .btn{
+  background: rgba(255, 255, 255, 0.219);
+  width: 100px;
+  height: 115px;
+}
+
+#btn-backward-categorie,#btn-backward-picto{
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+#btn-forward-categorie,#btn-forward-picto{
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+
+}
+
+/*
+ZONE CATEGORIE
+*/
+
+#carousel-categorie.scroll-img ul {
+  width:  1500px;
+  margin: 0 -40px;
+}
+
+/*
+ZONE PICTOGRAMME
+*/
+
+#carousel-picto.scroll-img ul {
+  width:  1500px;
+  margin: 0 -40px;
+}
+
+/*
+ZONE DROP
+*/
+
+.liste-drop{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 20px 0;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.drop{
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.658);
+  border-radius: 15px;
+  box-shadow:inset 0px 0px 5px rgba(0, 0, 0, 0.116);
+}
+
+/*
+ZONE Bottom
+*/
+.block-bottom{
+  display: flex;
+  flex:3;
+  align-items: center;
+}
+
+#phrase{
+  width: 100%;
+  height: 35px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.959);
+  font-size: 25px;
+  text-align: center;
+  border-radius: 50px;  
+}
+
+#remote{
+  background: rgba(35, 61, 77, 0.637);   
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border-radius: 50px;  
+}
+
+.remote {
+  padding:8px 10px;
+  color: rgba(255, 255, 255, 0.637);
+  display: inline;
+}
+
+.remote:hover {
+color: rgb(255, 255, 255);
+}
+
+/*
+FOOTER
+*/
+
+footer{
+  width: 100%;
+  background: #080708;
+  text-align: center;
+  flex:1;
+  color:#F2F4F3;
+}
+
+/*
+NAVBAR
+*/
+
+.navbar{
+  background-color: #080708;
+}
+/* change the brand and text color */
+.navbar .navbar-brand,
+.navbar .navbar-text {
+  color:#F2F4F3;
+}
+/* change the link color */
+.navbar .navbar-nav .nav-link {
+  color:#F2F4F3;
+  font-family: 'Lato', sans-serif;
+}
+/* change the color of active or hovered links */
+.navbar .nav-item.active .nav-link,
+.navbar .nav-item:hover .nav-link {
+  color:#F2F4F3;
+}
+.navbar a:hover{
+  color: rgb(150, 179, 83)
+}
+
+
+/* AUDIO */
+.action i{
+    height: max-content;
+    background: none;
+    color: rgb(192, 29, 29);
+    padding: 0;
+    border: none;
+    margin: 0 10px;
+}

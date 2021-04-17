@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profile{% endblock %}
+
+{% block body %}
+
+    <section id="header" class="jumbotron jumbotron-fluid text-center">
+        <img src="{{ asset('images/logo/TerrePlurielle.png') }}" class="d-inline-block align-top" alt="">
+    </section>
+
+
+    <section class="container app account">
+{% if is_granted('ROLE_USER') %}
+        <div class="container-content">
+
+            <div class="title-content">
+                <h1>Profile</h1>
+                <a href="{{ path('app_edit_account')}}"><i class="far fa-edit"></i></a>  
+                <hr>
+            </div>
+                    
+            <div class="profile">
+
+                <div class="block-profile">
+                    <h5>Nom: </h5>
+                    <p>{{ user.firstName }}</p>
+                </div>
+
+                <div class="block-profile">
+                    <h5>Prénom: </h5>
+                    <p>{{ user.surname }}</p>
+                </div>
+
+                <div class="block-profile"> 
+                    <h5>Date de naissance: </h5>   
+                    <p> {{ user.getDateDeNaissance() | date("m/d/Y")}} </p>
+
+                </div>
+
+                <div class="block-profile">
+                    <h5>Parents: </h5>
+
+                    {% if user.getFirstNameParent1 and user.getSurnameParent1 %}
+                    <p>{{ user.getFirstNameParent1 }} {{ user.getSurnameParent1 }}</p>
+                    {% endif %}
+
+                    {% if user.getFirstNameParent2 and user.getSurnameParent2 %}
+                    <p>et {{ user.getFirstNameParent2 }} {{ user.getSurnameParent2 }}</p>
+                    {% endif %}
+                </div>
+                
+                <div class="block-profile">
+                    {% if user.getFirstnameOrthophoniste and user.getSurnameOrthophoniste and user.getFirstnameEducateur and user.getSurnameEducateur %}
+                    <h5>Professionnels: </h5></br>
+                    <p>{{ user.getSurnameEducateur }} {{ user.getFirstnameEducateur }} - Educateur</p></br>
+                    <p>Dr.{{ user.getSurnameOrthophoniste }} {{ user.getFirstnameOrthophoniste }} - Orthophoniste</p>
+             
+                    
+                    {% elseif user.getFirstnameEducateur and user.getSurnameEducateur %}
+                    <h5>Éducateur: </h5>
+                    <p>{{ user.getFirstnameEducateur }} {{ user.getSurnameEducateur }}</p>
+                   {% elseif  user.getFirstnameOrthophoniste and user.getSurnameOrthophoniste %}
+                    <h5>Orthophoniste: </h5>
+                    <p>Dr.{{ user.getFirstnameOrthophoniste }} {{ user.getSurnameOrthophoniste }}</p>
+                    {% endif %}
+                </div>
+
+            </div>
+
+
+
+               
+            
+        </div>
+{% endif %}      
+
+    </section>
+
+
+
+{% endblock %}

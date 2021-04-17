@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/echange.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+
+    <section class="body-content container-fluid"> 
+        <article class="container-content user">
+            <h1 class="text-light text-center my-5">Mes enregistrements audio</h1>
+            <div class="row justify-content-center">
+                <div class="col-8 text-center mb-3">
+                    <audio controls src="" id="audio"></audio>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm text-center text-light">
+                            <thead>
+                                <tr>
+                                <th ># Enregistrements</th>
+                                <th >Date de l'enregistrement</th>
+                                <th >Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% set counter = 1 %}
+                                {% for audio in audios %}
+                                    <tr>
+                                        <td>Enregistrement n°{{counter}}</td>
+                                        <td>{{audio.createdAt | date('d/m/y')}}</td>
+                                        <td>
+                                            <a href="{{asset('/audios/' ~ audio.name)}}" class="play btn btn-sm btn-info px-2 py-0 mr-2">play</i></a>
+                                            <form method="post" action="{{ path('app_audio_delete',{id: audio.id}) }}" style="display:inline-block" onsubmit="return confirm('Êtes vous vraiment sûr de vouloir supprimer cet enregistrement ?')">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete'~ audio.id )}}">  
+                                                <input type="submit" class="btn btn-sm btn-danger px-2 py-0" value="Supprimer">
+                                            </form>
+                                        </td>
+                                        {% set counter = counter + 1 %}
+                                    </tr>
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="add mb-3">
+                    {{ knp_pagination_render(audios)}}
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#audio').hide();
+            let $play = $('.play');
+            let $audio = $('#audio');
+            $play.on('click', function (e){
+                e.preventDefault();
+                let $url = $(this).attr('href');
+                $audio.attr('src', $url).show();
+                $audio[0].play();
+            });
+        });
+    </script>
+
+{% endblock %}

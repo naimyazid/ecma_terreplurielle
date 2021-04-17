@@ -1,0 +1,47 @@
+{% extends 'security/index.html.twig' %}
+{% block body %}
+    <section id="header" class="jumbotron jumbotron-fluid text-center">
+        <img src="{{ asset('images/logo/TerrePlurielle.png') }}" class="d-inline-block align-top" alt="">
+    </section>
+
+    <section class="container connexion">
+    
+        <form class="form-signin" method="post">
+
+            {% if error %}
+                <div class="alert alert-danger text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <div class="title-content">
+                <h1>Se connecter</h1>
+                <hr>
+            </div>
+
+            <input type="email" name="email" value="{{ last_username }}" class="form-control mt-3" placeholder="E-mail" required autofocus>
+
+            
+            <input type="password" name="password" class="form-control mt-4" placeholder="Mot de passe" required>
+            
+            <input type="hidden" name="_csrf_token" class="form-control" value="{{ csrf_token('authenticate') }}">
+
+            <div class="pb-connexion">
+                <a href="{{ path('app_reset_password') }}" class="text-center"><small>Mot de passe oublié</small></a>
+                <small>  / </small>
+                <a class="text-center" href="{{ path('app_register_revalidation') }}"><small>Renvoyer un mail de confirmation</small></a>
+            </div>
+         
+            
+            <button class="btn btn-md btn-block mt-3 mb-4" type="submit">Connexion</button>
+            
+            <p>Vous n'avez pas encore de compte ? <a href="{{ path('app_register') }}">Inscrivez-vous</a></p> 
+            
+        </form>
+
+    </section>
+
+{% endblock %}

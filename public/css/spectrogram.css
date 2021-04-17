@@ -1,0 +1,69 @@
+#load_spectro{
+  background-image: url(../images/spectrogramme/spectrogram.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height:320px;
+  width:100%;
+  border: 1px solid #B6B582;
+}
+
+#chargement-patient, #chargement-therapist{
+  text-align: center;
+  margin-top: 15%;
+  width: 100%;
+  position: relative;
+}
+
+#chargement-patient img, #chargement-therapist img{
+  height: 60px;
+  width: 60px;
+}
+
+#chargement-patient p, #chargement-therapist p{
+color: #57F7D8;
+font-weight: bold;
+font-size: 12px;
+}
+
+#timeline, #timeline-therapist{
+  margin-bottom: 2%;
+}
+
+#playRecord-patient, #player-patient, #playRecord-therapist, #player-therapist, #record-therapist, #stop{
+  width: 60%;
+  margin-bottom: 2%;
+  border-radius: 5px; 
+  background-color: #747C34;
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.356);
+  color: white;
+}
+
+#playRecord-patient:focus, #player-patient:focus, #playRecord-therapist:focus, #player-therapist:focus, #record-therapist:focus, #stop:focus, 
+#playRecord-patient:active, #player-patient:active, #playRecord-therapist:active, #player-therapist:active, #record-therapist:active, #stop:active, #playRecord-patient:hover, #player-patient:hover, #playRecord-therapist:hover, #player-therapist:hover, #record-therapist:hover, #stop:hover{
+    transition: 0.5s;
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+    color: white!important;
+}
+
+.spectro{
+  position: relative;
+}
+.rotate {
+  -webkit-animation: spin .9s infinite linear;
+  animation: spin .9s infinite linear;
+}
+@-webkit-keyframes spin {
+  100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+  100% { -moz-transform: rotate(360deg); }
+}
+@keyframes spin {
+  100% {
+      -moz-transform:rotate(360deg);
+      -o-transform:rotate(360deg);
+      transform:rotate(360deg);
+  }
+}

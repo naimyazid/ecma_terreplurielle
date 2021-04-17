@@ -1,0 +1,78 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Admin-spectrogramme{% endblock %}
+
+{% block body %}
+
+    <section id="header" class="jumbotron jumbotron-fluid text-center">
+        <img src="{{ asset('images/logo/TerrePlurielle.png') }}" class="d-inline-block align-top" alt="">
+    </section>
+
+    <div class="title-content">
+        <h1>Spectrogramme</h1>
+        <hr>
+    </div>
+
+    <section class="container admin"> 
+        <article class="container-content user">
+        
+            <div class="row">
+            <div class="col-9 mb-4 d-flex"> 
+                <a href="/admin/{{id}}/audios" class="btn btn-sm px-4"> Enregistrements </a>
+                <a href="{{ path('admin_list_users') }}" class="btn btn-sm px-4"> Liste des utilisateurs </a>
+            </div>
+            </div>
+            <div class="row align-items-center py-auto mb-3">
+                <div class="col-9 position-relative">
+                    <div id="load_spectro" class="bg-info">
+                        <div id="chargement-patient">
+                            <img class="rotate" src="{{ asset('/images/spectrogramme/loading.svg')}}" alt="load">
+                            <p>Chargement du Spectrogramme...</p>
+                        </div>
+                        <div id="spectrogram" ></div>
+                        <div id="timeline"></div>
+                        <div id="waveform"></div>
+                    </div>
+                </div>
+                <div class="col-3" id="playspectro-patient">
+                    <h5 class="mb-5 font-weight-bold">Spectrogramme de l'enregistrment du patient</h5>
+                    <button id="player-patient" class="btn-sm">Spectrogramme</button>
+                    <audio  id="audio" src="{{asset('/audios/' ~ audio.name)}}"></audio>
+                </div>
+            </div>
+
+
+            <div class="row align-items-center py-auto mb-5">
+                <div class="col-9 position-relative">
+                    <div id="load_spectro" class="bg-info">
+                        <div id="chargement-therapist">
+                            <img class="rotate" src="{{ asset('/images/spectrogramme/loading.svg')}}" alt="load">
+                            <p>Chargement du Spectrogramme...</p>
+                        </div>
+                        <div id="spectrogram-therapist" ></div>
+                        <div id="timeline-therapist"></div>
+                        <div id="waveform-therapist"></div>
+                    </div>
+                </div>
+                <div class="col-3" id="playspectro-therapist">
+                    <h5 class="mb-5 font-weight-bold">Spectrogramme de l'enregistrment du Thérapeute</h5>
+                    <button id="player-therapist" class="btn-sm" >Spectrogramme</button>
+                    <button id="record-therapist" class="btn-sm">Enregistrer</button>
+                </div>
+            </div>
+
+        </article>
+    </section>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('js/audio/recorder.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/audio/Fr.voice.js') }}"></script>
+    <script type="text/javascript" type="text/javascript" src="{{ asset('/js/spectrogramme/wavesurfer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/wavesurfer.spectrogram.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/wavesurfer.timeline.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/time_interval.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/spectrogram_patient.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/spectrogram_therapeute.js') }}"></script>
+{% endblock %}

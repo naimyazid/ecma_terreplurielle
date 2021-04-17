@@ -1,0 +1,87 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Admin-audio{% endblock %}
+
+{% block body %}
+
+    <section id="header" class="jumbotron jumbotron-fluid text-center">
+        <img src="{{ asset('images/logo/TerrePlurielle.png') }}" class="d-inline-block align-top" alt="">
+    </section>
+
+    <div class="title-content">
+        <h1>Enregistrements audio du patient : <strong>{{user.surname}} {{user.firstName}} </strong></h1>
+        <hr>
+    </div>
+
+    <section class="container admin"> 
+        <article class="container-content user">
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <a class="btn btn-sm text-light mb-2" href="{{ path('admin_list_users') }}">Liste des utilisateurs</a>
+                </div>
+                <div class="col-6 text-right">
+                    <audio controls src="" id="audio"></audio>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped text-center">
+                    <thead>
+                        <tr>
+                          <th ># Enregistrements</th>
+                          <th >Nom</th>
+                          <th >Prénom</th>
+                          <th >Date de l'enregistrement</th>
+                          <th >Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% set counter = 1 %}
+                        {% for audio in audios %}
+                            <tr>
+                                <td>Enregistrement n°{{counter}}</td>
+                                <td>{{user.surname}}</td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{audio.createdAt | date('d/m/y')}}</td>
+                                <td class="d-flex">
+                                    <a href="{{asset('/audios/' ~ audio.name)}}" class="play action ml-5"><i class="far fa-play-circle ml-5"></i></a>
+                                    <a href="{{path('admin_audio', {id: audio.id})}}" class="action"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path style="fill:#E76522;" d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.141 16.566l1.081-6.964 1.104 4.742c.109.486.784.541.968.073l1.001-2.557.934 2.176c.155.361.644.417.876.1l.85-1.156h1.837c.271 0 .49-.22.49-.49s-.22-.49-.49-.49h-2.099c-.162 0-.315.078-.41.208l-.472.611-1.071-2.496c-.179-.417-.773-.408-.939.016l-.848 2.168-1.308-6.102c-.123-.548-.907-.517-.996.03l-1.084 7-1.108-4.118c-.124-.492-.818-.52-.975-.032l-.825 2.715h-2.885c-.27 0-.49.22-.49.49s.22.49.49.49h3.284c.184 0 .382-.148.434-.324l.411-1.387 1.247 5.338c.135.537.905.501.993-.041z"/></a>
+                                    <form method="post" action="{{ path('admin_audio_delete',{id: audio.id}) }}" style="display:inline-block" onsubmit="return confirm('Êtes vous vraiment sûr de vouloir supprimer cet enregistrement ?')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete'~ audio.id )}}">  
+                                        <button id="delete" class="action"><i class="far fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                                {% set counter = counter + 1 %}
+                            </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+             <div class="add">
+            {{ knp_pagination_render(audios)}}
+            </div>
+        </article> 
+    </section>  
+
+{% endblock %}
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#audio').hide();
+            let $play = $('.play');
+            let $audio = $('#audio');
+            $play.on('click', function (e){
+                e.preventDefault();
+                let $url = $(this).attr('href');
+                $audio.attr('src', $url).show();
+                $audio[0].play();
+            });
+        });
+    </script>
+
+{% endblock %}
+
